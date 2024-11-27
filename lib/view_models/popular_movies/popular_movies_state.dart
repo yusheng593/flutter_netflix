@@ -1,5 +1,5 @@
 import 'package:flutter_netflix/models/movie_model.dart';
-import 'package:flutter_netflix/screens/home_screen.dart';
+import 'package:flutter_netflix/widgets/movies_card_list.dart';
 
 class PopularMoviesState implements MovieState {
   final int currentPage;
