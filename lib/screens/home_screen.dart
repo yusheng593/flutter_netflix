@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix/common/app_gradients.dart';
+import 'package:flutter_netflix/common/app_spaces.dart';
 import 'package:flutter_netflix/common/utils.dart';
+import 'package:flutter_netflix/screens/search_screen.dart';
+import 'package:flutter_netflix/services/init_getit.dart';
+import 'package:flutter_netflix/services/navigation_service.dart';
 import 'package:flutter_netflix/view_models/popular_movies/popular_movies_provider.dart';
 import 'package:flutter_netflix/view_models/top_rated_movies/top_rated_movies_provider.dart';
 import 'package:flutter_netflix/widgets/movies_card_list.dart';
@@ -19,7 +24,9 @@ class HomeScreen extends StatelessWidget {
         leading: Image.asset('assets/netflix.png'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              getIt<NavigationService>().navigate(const SearchScreen());
+            },
             icon: const Icon(
               Icons.search,
               color: kWhiteColor,
@@ -33,10 +40,39 @@ class HomeScreen extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TopRatedTvList(width: width, height: height),
+              Row(
+                children: [
+                  SizedBox(
+                    width: width * 0.047,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+                    height: height * 0.035,
+                    decoration: BoxDecoration(
+                      color: kWhiteColor.withOpacity(0.2),
+                      border: Border.all(color: kWhiteColor.withOpacity(0.5)),
+                      borderRadius: BorderRadius.circular(height * 0.035),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '最高評分劇集',
+                        style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: height * 0.015,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
-                height: height * 0.03,
+                height: AppSpaces.heightSpace(context),
+              ),
+              const TopRatedTvList(),
+              SizedBox(
+                height: AppSpaces.heightSpace(context),
               ),
               Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
@@ -46,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: height * 0.03,
+                height: AppSpaces.heightSpace(context),
               ),
               Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {

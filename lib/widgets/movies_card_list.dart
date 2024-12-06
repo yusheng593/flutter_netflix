@@ -1,13 +1,7 @@
-// 定義一個介面，確保所有狀態類型都實作這個介面
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix/common/api_constants.dart';
 import 'package:flutter_netflix/common/utils.dart';
-import 'package:flutter_netflix/models/movie_model.dart';
 import 'package:flutter_netflix/widgets/cached_image_widget.dart';
-
-abstract class MovieState {
-  List<MovieModel> get moviesList;
-}
 
 class MoviesCardList<T extends MovieState> extends StatelessWidget {
   const MoviesCardList({
@@ -35,7 +29,7 @@ class MoviesCardList<T extends MovieState> extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: height * 0.01,
+          height: height * 0.005,
         ),
         SizedBox(
           width: double.infinity,

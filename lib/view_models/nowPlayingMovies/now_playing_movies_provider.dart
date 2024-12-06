@@ -4,19 +4,19 @@ import 'package:flutter_netflix/models/movie_model.dart';
 import 'package:flutter_netflix/repository/movies_repository.dart';
 import 'package:flutter_netflix/services/init_getit.dart';
 import 'package:flutter_netflix/services/navigation_service.dart';
-import 'package:flutter_netflix/view_models/top_rated_movies/top_rated_movies_state.dart';
+import 'package:flutter_netflix/view_models/nowPlayingMovies/now_playing_movies_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final topRatedMoviesProvider =
-    StateNotifierProvider<TopRatedMoviesProvider, TopRatedMoviesState>(
-        (_) => TopRatedMoviesProvider());
+final nowPlayingMoviesProvider =
+    StateNotifierProvider<NowPlayingMoviesProvider, NowPlayingMoviesState>(
+        (_) => NowPlayingMoviesProvider());
 
-class TopRatedMoviesProvider extends StateNotifier<TopRatedMoviesState> {
-  TopRatedMoviesProvider() : super(TopRatedMoviesState());
+class NowPlayingMoviesProvider extends StateNotifier<NowPlayingMoviesState> {
+  NowPlayingMoviesProvider() : super(NowPlayingMoviesState());
 
   final MoviesRepository _moviesRepository = getIt<MoviesRepository>();
 
-  Future<void> getTopRatedMovies() async {
+  Future<void> getNowPlayingMovies() async {
     if (state.isLoading) {
       return;
     }
@@ -24,10 +24,10 @@ class TopRatedMoviesProvider extends StateNotifier<TopRatedMoviesState> {
     state = state.copyWith(isLoading: true);
 
     try {
-      List<MovieModel> topRatedMovies =
-          await _moviesRepository.fetchTopRatedMovies(page: state.currentPage);
+      List<MovieModel> nowPlayingMovies = await _moviesRepository
+          .fetchNowPlayingMovies(page: state.currentPage);
       state = state.copyWith(
-        moviesList: [...state.moviesList, ...topRatedMovies],
+        moviesList: [...state.moviesList, ...nowPlayingMovies],
         currentPage: state.currentPage + 1,
         fetchMoviesError: '',
         isLoading: false,

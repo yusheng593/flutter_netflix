@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_netflix/common/utils.dart';
 import 'package:flutter_netflix/screens/home_screen.dart';
 import 'package:flutter_netflix/screens/more_screen.dart';
-import 'package:flutter_netflix/screens/search_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -12,10 +11,6 @@ class BottomNavBar extends StatelessWidget {
       Tab(
         icon: Icon(Icons.home),
         text: '首頁',
-      ),
-      Tab(
-        icon: Icon(Icons.search),
-        text: "搜尋",
       ),
       Tab(
         icon: Icon(Icons.photo_library_outlined),
@@ -33,7 +28,7 @@ class BottomNavBar extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         bottomNavigationBar: Container(
           color: kBlackColor,
@@ -43,7 +38,6 @@ class BottomNavBar extends StatelessWidget {
         body: const TabBarView(
           children: [
             HomeScreen(),
-            SearchScreen(),
             MoreScreen(),
           ],
         ),

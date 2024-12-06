@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix/services/init_getit.dart';
 import 'package:flutter_netflix/services/navigation_service.dart';
+import 'package:flutter_netflix/view_models/nowPlayingMovies/now_playing_movies_provider.dart';
 import 'package:flutter_netflix/view_models/popular_movies/popular_movies_provider.dart';
 import 'package:flutter_netflix/view_models/top_rated_movies/top_rated_movies_provider.dart';
 import 'package:flutter_netflix/view_models/top_rated_tv/top_rated_tv_provider.dart';
@@ -16,6 +17,7 @@ final initProvider = FutureProvider.autoDispose<void>((ref) async {
     await ref.read(topRatedTvProvider.notifier).getTopRatedTv();
     await ref.read(topRatedMoviesProvider.notifier).getTopRatedMovies();
     await ref.read(popularMoviesProvider.notifier).getPopularMovies();
+    await ref.read(nowPlayingMoviesProvider.notifier).getNowPlayingMovies();
   });
 });
 

@@ -5,17 +5,12 @@ import 'package:flutter_netflix/widgets/top_rated_tv_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TopRatedTvList extends StatelessWidget {
-  const TopRatedTvList({
-    super.key,
-    required this.width,
-    required this.height,
-  });
-
-  final double width;
-  final double height;
+  const TopRatedTvList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final topRatedTvState = ref.watch(topRatedTvProvider);
@@ -31,10 +26,10 @@ class TopRatedTvList extends StatelessWidget {
             );
           },
           options: CarouselOptions(
-            height: height * 0.6,
+            height: width <= 375 ? height * 0.65 : height * 0.6, // iPhone se
             enlargeCenterPage: true, // 突出顯示當前項目
             enableInfiniteScroll: false,
-            viewportFraction: 0.8, // 控制每個項目的寬度占比
+            viewportFraction: 0.7, // 控制每個項目的寬度占比
             scrollPhysics: const BouncingScrollPhysics(), // 增加彈性滾動效果
           ),
         );

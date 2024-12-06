@@ -13,10 +13,11 @@ class CachedImageWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imgUrl ?? movieImage,
       fit: boxFit ?? BoxFit.cover,
-      errorWidget: (context, url, error) => const Icon(
-        Icons.error,
-        color: Colors.red,
-      ),
+      errorWidget: (context, url, error) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: kRedColor, width: 3),
+          ),
+          child: Image.asset('assets/netflix.png')),
     );
   }
 }

@@ -17,4 +17,13 @@ class MoviesRepository {
   Future<List<TvModel>> fetchTopRatedTv({int page = 1}) async {
     return await _apiService.fetchTopRatedTv(page: page);
   }
+
+  Future<List<MovieModel>> searchMovie(
+      {required String title, int page = 1}) async {
+    return await _apiService.searchMovie(title: title, page: page);
+  }
+
+  Future<List<MovieModel>> fetchNowPlayingMovies({int page = 1}) async {
+    return await _apiService.fetchNowPlayingMovies(page: page);
+  }
 }

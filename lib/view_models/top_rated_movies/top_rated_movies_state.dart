@@ -1,5 +1,5 @@
+import 'package:flutter_netflix/common/utils.dart';
 import 'package:flutter_netflix/models/movie_model.dart';
-import 'package:flutter_netflix/widgets/movies_card_list.dart';
 
 class TopRatedMoviesState implements MovieState {
   final int currentPage;

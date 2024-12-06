@@ -33,20 +33,20 @@ class MovieModel {
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
-      adult: json['adult'],
+      adult: json['adult'] ?? false,
       backdropPath: json['backdrop_path'] ?? '',
-      genreIds: List<int>.from(json['genre_ids']),
-      id: json['id'],
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
-      overview: json['overview'],
-      popularity: json['popularity'].toDouble(),
+      genreIds: List<int>.from(json['genre_ids'] ?? []),
+      id: json['id'] ?? 0,
+      originalLanguage: json['original_language'] ?? '',
+      originalTitle: json['original_title'] ?? '',
+      overview: json['overview'] ?? '簡介不可用',
+      popularity: (json['popularity'] ?? 0.0).toDouble(),
       posterPath: json['poster_path'] ?? '',
-      releaseDate: json['release_date'],
-      title: json['title'],
-      video: json['video'],
-      voteAverage: json['vote_average'].toDouble(),
-      voteCount: json['vote_count'],
+      releaseDate: json['release_date'] ?? '未知日期',
+      title: json['title'] ?? '未命名',
+      video: json['video'] ?? false,
+      voteAverage: (json['vote_average'] ?? 0.0).toDouble(),
+      voteCount: json['vote_count'] ?? 0,
     );
   }
   Map<String, dynamic> toJson() {
