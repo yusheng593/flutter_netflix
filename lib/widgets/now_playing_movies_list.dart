@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_netflix/common/api_constants.dart';
 import 'package:flutter_netflix/common/utils.dart';
 import 'package:flutter_netflix/widgets/cached_image_widget.dart';
+import 'package:flutter_netflix/widgets/movie_detail_navigator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NowPlayingMoviesList<T extends MovieState> extends StatelessWidget {
@@ -36,32 +37,37 @@ class NowPlayingMoviesList<T extends MovieState> extends StatelessWidget {
           return Expanded(
             child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: height * 0.1,
-                  margin: EdgeInsets.all(width * 0.02),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedImageWidget(
+                return MovieDetailNavigator(
+                  id: movieState.moviesList[index].id,
+                  isTvShow: false,
+                  child: Container(
+                    height: height * 0.1,
+                    margin: EdgeInsets.all(width * 0.02),
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedImageWidget(
                             imgUrl: ApiConstants.postUrl +
-                                movieState.moviesList[index].backdropPath),
-                      ),
-                      SizedBox(
-                        width: width * 0.02,
-                      ),
-                      Text(
-                        movieState.moviesList[index].title,
-                        style: const TextStyle(
-                            color: kWhiteColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      const Spacer(),
-                      const Icon(Icons.info_outline, color: kWhiteColor),
-                    ],
+                                movieState.moviesList[index].backdropPath,
+                          ),
+                        ),
+                        SizedBox(
+                          width: width * 0.02,
+                        ),
+                        Expanded(
+                          child: Text(
+                            movieState.moviesList[index].title,
+                            style: const TextStyle(
+                                color: kWhiteColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                            softWrap: true,
+                          ),
+                        ),
+                        const Icon(Icons.info_outline, color: kWhiteColor),
+                      ],
+                    ),
                   ),
                 );
               },

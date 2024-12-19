@@ -3,7 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_netflix/common/utils.dart';
 
 class CachedImageWidget extends StatelessWidget {
-  const CachedImageWidget({super.key, required this.imgUrl, this.boxFit});
+  const CachedImageWidget({
+    super.key,
+    required this.imgUrl,
+    this.boxFit,
+  });
 
   final String? imgUrl;
   final BoxFit? boxFit;
