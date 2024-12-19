@@ -18,86 +18,90 @@ class UpcommingMoviesWidget<T extends MovieState> extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppGradients.blueToBlackGradient(),
       ),
-      child: Expanded(
-        child: ListView.builder(
-          itemCount: movieState.moviesList.length,
-          itemBuilder: (BuildContext context, int index) {
-            List<String> dateParts =
-                movieState.moviesList[index].releaseDate.split('-');
-            final month = dateParts[1];
-            final day = dateParts[2];
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: movieState.moviesList.length,
+              itemBuilder: (BuildContext context, int index) {
+                List<String> dateParts =
+                    movieState.moviesList[index].releaseDate.split('-');
+                final month = dateParts[1];
+                final day = dateParts[2];
 
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '$month月',
-                        style: const TextStyle(
-                            color: kWhiteColor,
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '$month月',
+                            style: const TextStyle(
+                                color: kWhiteColor,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            day,
+                            style: const TextStyle(
+                                color: kWhiteColor,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
-                      Text(
-                        day,
-                        style: const TextStyle(
-                            color: kWhiteColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                        width: width * 0.03,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: CachedImageWidget(
+                                  imgUrl: ApiConstants.postUrl +
+                                      movieState.moviesList[index].backdropPath,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Text(
+                                movieState.moviesList[index].title,
+                                style: const TextStyle(
+                                    color: kWhiteColor,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(
+                              movieState.moviesList[index].overview,
+                              style: const TextStyle(
+                                  color: kWhiteColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(
-                    width: width * 0.03,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: CachedImageWidget(
-                              imgUrl: ApiConstants.postUrl +
-                                  movieState.moviesList[index].backdropPath,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text(
-                            movieState.moviesList[index].title,
-                            style: const TextStyle(
-                                color: kWhiteColor,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Text(
-                          movieState.moviesList[index].overview,
-                          style: const TextStyle(
-                              color: kWhiteColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
-          },
-        ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
